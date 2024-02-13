@@ -57,12 +57,13 @@ a {
 
 #yes {
     position: absolute;
-    left: 90px;
+    left: 50px;
+    z-index: 10;
 }
 
 #no {
     position: absolute;
-    right: 90px;
+    right: 50px;
 }
 
 #question-text {
