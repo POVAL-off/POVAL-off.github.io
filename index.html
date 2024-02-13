@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кохаю 💞</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="./course/images/icon.png">
+</head>
+
+<body>
+    <div class="app">
+        <div class="content">
+            <div class="content-header">
+                <img src="./course/gif/mochi-mochimochi.gif" alt="Meow" class="gif">
+            </div>
+            <div class="content-text">
+                Привіт Настюш, сьогодні т маєш доказати що т мене любиш
+                <br />
+                <br />
+                Т мене любиш?
+            </div>
+            <div class="content-action">
+                <button class="button" id="yes">ТАК</button>
+                <button class="button" id="no">НІ</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        var countClickYesButton = 6;
+
+        const buttonYes = document.getElementById('yes');
+        buttonYes.addEventListener('click', (event) => {
+            countClickYesButton--
+            buttonYes.style.left = `${randomInteger(50, window.innerWidth - 100)}px`;
+            buttonYes.style.top = `${randomInteger(0, window.innerWidth)}px`;
+            if (countClickYesButton === 3) {
+                buttonYes.style.backgroundColor = "transparent"
+                buttonYes.style.color = "#e62f18"
+                buttonYes.innerHTML = 'Спрятався)'
+            }
+            if (countClickYesButton === 2) {
+                buttonYes.style.fontSize = "14px"
+                buttonYes.innerHTML = 'Найди)'
+                buttonYes.style.left = "163px";
+                buttonYes.style.top = "210px"
+            }
+            if (countClickYesButton === 1) {
+                buttonYes.style.backgroundColor = "#e62f18"
+                buttonYes.style.color = "#eee"
+                buttonYes.style.border = "none"
+                buttonYes.innerHTML = 'Ну окей'
+                buttonYes.style.bottom = `${0}px`;
+                buttonYes.style.top = `auto`;
+                buttonYes.style.left = `0px`;
+                const textContent = document.getElementsByClassName('content-text')[0]
+                textContent.innerHTML = 'Но не всьо так просто. <br /> Щоб тобі доказати що т мене любиш тобі треба відповісти на деякі питання.'
+            }
+            if (!countClickYesButton) {
+                location.href = "./internment.html"
+            }
+        })
+
+        const buttonNo = document.getElementById('no');
+        buttonNo.addEventListener('click', (event) => {
+            buttonNo.innerHTML = "Ти шо охуїла?"
+            buttonNo.style.backgroundColor = "transparent"
+            buttonNo.style.color = "#e62f18"
+            buttonNo.style.top = `${0}px`;
+        })
+
+        function randomInteger(min, max) {
+            let rand = min + Math.random() * (max - min);
+            return Math.round(rand);
+        }
+    </script>
+</body>
+
+</html>

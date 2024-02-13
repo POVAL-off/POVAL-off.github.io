@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кохаю 💞</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="./course/images/icon.png">
+</head>
+
+<body>
+    <div class="app">
+        <div class="content">
+            <div class="content-header">
+                <img src="./course/gif/mochi-mochimochi.gif" alt="Meow" class="gif" id="cat-image">
+            </div>
+            <div class="content-text">
+            </div>
+            <div class="content-action">
+            </div>
+        </div>
+    </div>
+    <script>
+        const [rightAnswers, attempts, questionsCount] = location.href.split('=').pop().split(':');
+        const right = document.createElement('div');
+        right.className = "right";
+        right.innerHTML = `${rightAnswers} / ${questionsCount}`
+        document.getElementsByClassName('content-text')[0].appendChild(right);
+        if (rightAnswers < questionsCount * 0.5) {
+            document.getElementById('cat-image').src = "./course/gif/poof.gif";
+            document.getElementsByClassName('content-text')[0].innerHTML += "Я так, менше половини, я зараз піду плакати 😢 <br /> Но на нині тебе прощаю, айбо дале маєш виправитися. ПОНЯТНО!"
+        } else {
+            document.getElementById('cat-image').src = "./course/gif/cool.gif";
+            document.getElementsByClassName('content-text')[0].innerHTML += "Ураааа, молодець, значит ти точно є моя Валентинка 💞💞💞  <br /> <br /> Кохаю тебе 💞💞💞"
+        }
+
+    
+    </script>
+</body>
+
+</html>

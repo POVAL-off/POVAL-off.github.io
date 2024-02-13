@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кохаю 💞</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="./course/images/icon.png">
+</head>
+
+<body>
+    <div class="app">
+        <div class="content internment">
+            <div class="content-header">
+                <img src="./course/gif/think.gif" alt="Meow" class="gif" id="cat-image">
+            </div>
+            <div class="content-container">
+                <p id="question-text"></p>
+                <div id="answers"></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const questions = [
+            {
+                question: 'Кого я люблю більше всього на світі?',
+                attempts: 1,
+                answers: [
+                    {
+                        answer: 'Рево',
+                        isRight: false,
+                        falseText: 'Як говорится т як суші а рево як соєвий соус. Но всьоровно не правильно'
+                    }, {
+                        answer: 'Тебе сонечко',
+                        isRight: true
+                    }, {
+                        answer: 'Гітару',
+                        isRight: false
+                    }, {
+                        answer: 'Свої сісі',
+                        isRight: false,
+                        falseText: 'Ну нє, я їх звісно люблю, но не правильно'
+                    }
+                ]
+            },
+            {
+                question: 'Проміняла б т мене на тапок?',
+                attempts: 0,
+                answers: [
+                    {
+                        answer: 'Йо йо йо йо ',
+                        isRight: true
+                    }, {
+                        answer: 'Таде, ні',
+                        isRight: true
+                    },
+                ]
+            },
+            {
+                question: 'А чи помниш т перше своє сообщеніє яке написала?',
+                attempts: 0,
+                answers: [
+                    {
+                        answer: 'Валєєєр, давай обшатися якщо не проти?',
+                        isRight: false
+                    }, {
+                        answer: 'Прівет Валєєєр, ти не протів пообщатися?',
+                        isRight: false
+                    }, {
+                        answer: 'Що т голова, заєбав, го общатися.',
+                        isRight: false,
+                        falseText: 'Но т шутніца'
+                    }, {
+                        answer: 'Валєєєра прівет,го общатися аж ти не протів?',
+                        isRight: true
+                    }
+                ]
+            },
+            {
+                question: 'А що я отвітив?',
+                attempts: 1,
+                answers: [
+                    {
+                        answer: 'Прівет, звісно не проти',
+                        isRight: false
+                    }, {
+                        answer: 'Ооо прівет. Я звісно не проти',
+                        isRight: true
+                    }, {
+                        answer: 'Шо ти мала, та давай, ЕШКЕРЕЕЕ 👿',
+                        isRight: false,
+                        falseText: 'СМЕШНОО АААА ЕШКЕРЕЕЕ 👿👿👿'
+                    }, {
+                        answer: 'Давай, я не проти',
+                        isRight: false
+                    }
+                ]
+            },
+            {
+                question: 'Типир таке питання не просте, скільки повних днів ми вже разом?',
+                attempts: 0,
+                answers: [
+                    {
+                        answer: '615',
+                        isRight: false
+                    }, {
+                        answer: '585',
+                        isRight: false
+                    }, {
+                        answer: '591',
+                        isRight: true
+                    }, {
+                        answer: '596',
+                        isRight: false
+                    }
+                ]
+            },
+            {
+                question: 'Коли ця фотка була зроблена?',
+                image: 'photo.jpg',
+                attempts: 1,
+                answers: [
+                    {
+                        answer: '3 липня 2022',
+                        isRight: false
+                    }, {
+                        answer: '5 липня 2023',
+                        isRight: false
+                    }, {
+                        answer: '4 липня 2022',
+                        isRight: false
+                    }, {
+                        answer: '5 липня 2022',
+                        isRight: true
+                    }
+                ]
+            },
+            {
+                question: 'Чи помниш ту саму пісню пуд яку гуляв надіючись встрітити тебе',
+                attempts: 0,
+                answers: [
+                    {
+                        answer: 'Улица Сталеваров',
+                        isRight: true
+                    }, {
+                        answer: 'Теарт Теней',
+                        isRight: false
+                    }, {
+                        answer: 'Днями Ночами',
+                        isRight: false
+                    }, {
+                        answer: 'Кроме твоего лица',
+                        isRight: false
+                    }
+                ]
+            },
+            {
+                question: 'Бутерброди то їда',
+                attempts: 0,
+                answers: [
+                    {
+                        answer: 'Йо, конечно',
+                        isRight: false,
+                        falseText: 'Дустаниш по лобани!'
+                    }, {
+                        answer: 'Ні, ти шо',
+                        isRight: true
+                    }
+                ]
+            },
+            {
+                question: 'На кулько проценту т мене любиш',
+                attempts: 0,
+                answers: [
+                    {
+                        answer: '100%',
+                        isRight: false,
+                        falseText: 'Мало!'
+                    }, {
+                        answer: '10000%',
+                        isRight: false,
+                        falseText: 'Мало!'
+                    }, {
+                        answer: '1000000%',
+                        isRight: false,
+                        falseText: 'Мало!'
+                    }, {
+                        answer: '10000000%',
+                        isRight: false,
+                        falseText: 'Терпимо, но всьоровно мало!'
+                    },
+                ]
+            }
+        ];
+
+        const startAttempts = questions.reduce((acc, next) => acc += next.attempts, 0);
+        var rightAnswers = 0;
+        var currentQuetionIndex = 0;
+
+        const questionRender = (question) => {
+            if (question.image) {
+                document.getElementById('cat-image').src = `./course/images/${question.image}`;
+            } else {
+                document.getElementById('cat-image').src = "./course/gif/think.gif";
+            }
+            document.getElementById('question-text').innerHTML = question.question;
+            var answersDiv = document.getElementById("answers");
+            answersDiv.innerHTML = "";
+            question.answers.forEach((answer) => {
+                var link = document.createElement("button");
+                link.className = "button answer-button";
+                link.textContent = answer.answer;
+                link.addEventListener('click', () => handleSelecnAnswer(answer, question))
+                answersDiv.appendChild(link);
+            })
+        }
+
+        const handleSelecnAnswer = (answer, question) => {
+            if (!answer.isRight) {
+                document.getElementById('cat-image').src = "./course/gif/notRight.gif";
+                document.getElementById('question-text').innerHTML = "НЕ ПРАВИЛЬНО";
+                var description = document.createElement("p");
+                description.className = "description";
+                description.innerHTML = answer.falseText || "";
+                document.getElementById('question-text').appendChild(description);
+                var answersDiv = document.getElementById("answers");
+                answersDiv.innerHTML = "";
+                if (question?.attempts) {
+                    question.attempts = question.attempts - 1;
+                    var answersDiv = document.getElementById("answers");
+                    var link = document.createElement("button");
+                    link.className = "button";
+                    link.textContent = "Спробувати ще раз";
+                    link.addEventListener('click', () => questionRender(questions[currentQuetionIndex]));
+                    answersDiv.appendChild(link);
+                } else {
+                    var answersDiv = document.getElementById("answers");
+                    var link = document.createElement("button");
+                    link.className = "button";
+                    if (currentQuetionIndex === questions.length - 1) {
+                        link.textContent = "Закінчити";
+                        link.addEventListener('click', () => {
+                            const currentAttempts = questions.reduce((acc, next) => acc += next.attempts, 0);
+                            location.href = `./love.html?info=${rightAnswers}:${startAttempts - currentAttempts}:${questions.length}`
+                        });
+                    } else {
+                        link.textContent = "Перейти до слідующого питання";
+                        link.addEventListener('click', () => questionRender(questions[++currentQuetionIndex]));
+                    }
+                    answersDiv.appendChild(link);
+                }
+            } else {
+                rightAnswers++
+                document.getElementById('cat-image').src = "./course/gif/right.gif";
+                document.getElementById('question-text').innerHTML = "ПРАВИЛЬНО 💞💞💞";
+                var answersDiv = document.getElementById("answers");
+                answersDiv.innerHTML = "";
+                var link = document.createElement("button");
+                link.className = "button";
+                if (currentQuetionIndex === questions.length - 1) {
+                    link.textContent = "Закінчити";
+                    link.addEventListener('click', () => {
+                        const currentAttempts = questions.reduce((acc, next) => acc += next.attempts, 0);
+                        location.href = `./love.html?info=${rightAnswers}:${startAttempts - currentAttempts}:${questions.length}`
+                    });
+                } else {
+                    link.textContent = "Перейти до слідующого питання";
+                    link.addEventListener('click', () => questionRender(questions[++currentQuetionIndex]));
+                }
+                answersDiv.appendChild(link);
+            }
+        }
+
+        questionRender(questions[currentQuetionIndex]);
+    </script>
+</body>
+
+</html>
